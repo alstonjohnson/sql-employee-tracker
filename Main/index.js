@@ -5,7 +5,7 @@ const database = require('./db/connection')
 
 
 const tracker = function () {
-    inquirer.createPromptModule([{
+    inquirer.prompt([{
         type: 'list',
         name: 'prompt',
         message: 'What would you like to do?',
@@ -49,6 +49,6 @@ const tracker = function () {
                     tracker();
                 });
             })
-        }
+        } 
     })
 }
