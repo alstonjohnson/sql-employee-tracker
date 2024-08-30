@@ -12,7 +12,24 @@ const tracker = function () {
         choices: ['View all dpartments', 'View all roles', 'view all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an empolyee role']
     }]).then((answers) => {
         if (answers.prompt === 'View all departments') {
-            db
+            database.query(`SELECT * FROM department`, (result) => {
+                console.log("Viewing All Departments: ");
+                console.table(result);
+                tracker();
+            });
+        } else if (answers.prompt === 'View All Roles') {
+            database.query(`SELECT * FROM role`, (result) => {
+                console.log("Viewing All Roles: ");
+                console.table(result);
+                tracker();
+            });
+        } else if (answers.prompt === 'View All Employees') {
+            database.query(`SELECT * FROM employee`, (err, result) => {
+                if (err) throw err;
+                console.log("Viewing All Employees: ");
+                console.table(result);
+                tracker();
+            });
         }
     })
 }
