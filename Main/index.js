@@ -30,6 +30,25 @@ const tracker = function () {
                 console.table(result);
                 tracker();
             });
+        } else if (answers.prompt === 'Add A Department') {
+            inquirer.prompt([{
+                type: 'input',
+                name: 'department',
+                message: 'What is the name of the dpeartment?',
+                validate: deptInput => {
+                    if (deptInput) {
+                        return true;
+                    } else {
+                        console.log('Please Add A Department!');
+                        return false;
+                    }
+                }
+            }]).then((answers) => {
+                database.query(`INSERT INTO department (name) VALUES (?)`, [answers.department], (result) => {
+                    console.log(`Added ${answers.department} to the database.`)
+                    tracker();
+                });
+            })
         }
     })
 }
