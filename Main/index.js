@@ -104,7 +104,8 @@ const tracker = function () {
                 })
             });
         }
-    }) else if (answers.prompt === 'Add An Employee') {
+    })
+    if (answers.prompt === 'Add An Employee') {
         database.query(`SELECT * FROM employee, role`, (result) => {
 
             inquirer.prompt([
@@ -216,7 +217,7 @@ const tracker = function () {
                     }
                 }
 
-                database.query(`UPDATE employee SET ? WHERE ?`, [{role_id: role}, {last_name: name}], (result) => {
+                database.query(`UPDATE employee SET ? WHERE ?`, [{ role_id: role }, { last_name: name }], (result) => {
                     console.log(`Updated ${answers.employee} role to the database.`)
                     tracker();
                 });
