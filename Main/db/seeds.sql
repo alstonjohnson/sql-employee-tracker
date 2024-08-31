@@ -16,4 +16,14 @@ VALUES  ('Staff Accountant', 70000, 1),
         ('Full Stack Developer', 100000, 3),
         ('Data Analyst', 110000, 3);
 
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES  ('Nasery', 'Athear', 1, 2),
+        ('Stark', 'Skip', 2, null),
+        ('Martin', 'Carter', 3, null),
+        ('Wegman', 'Michael', 4, 7),
+        ('Maza', 'Rowena', 5, 6),
+        ('Mann', 'Mike', 6, null),
+        ('Johnson', 'Alston', 7, null),
+        ('Hazlewood', 'Amber', 8, null);
+
     
