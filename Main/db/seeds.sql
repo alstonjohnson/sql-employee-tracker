@@ -4,6 +4,6 @@ VALUES  ('Finance'),
         ('Brand Team'),
         ('IT'),
         ('Procurement'),
-        ('Operations'),
+        ('Operations'),;
 
     
