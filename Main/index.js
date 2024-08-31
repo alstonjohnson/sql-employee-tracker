@@ -1,6 +1,6 @@
 
 const inquirer = require('inquirer');
-const postgres = require('pg'); 
+const postgres = require('pg');
 const database = require('./database/connection')
 
 
@@ -103,7 +103,8 @@ const tracker = function () {
                     });
                 })
             });
-    }}) else if (answers.prompt === 'Add An Employee') {
+        }
+    }) else if (answers.prompt === 'Add An Employee') {
         database.query(`SELECT * FROM employee, role`, (result) => {
 
             inquirer.prompt([
@@ -172,4 +173,5 @@ const tracker = function () {
                 });
             })
         });
-}};
+    }
+};
