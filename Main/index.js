@@ -173,5 +173,54 @@ const tracker = function () {
                 });
             })
         });
+    } else if (answers.prompt === 'Update An Employee Role') {
+        database.query(`SELECT * FROM employee, role`, (result) => {
+
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'employee',
+                    message: 'Which employees role do you want to update?',
+                    choices: () => {
+                        const array = [];
+                        for (var i = 0; i < result.length; i++) {
+                            array.push(result[i].last_name);
+                        }
+                        const employeeArray = [...new Set(array)];
+                        return employeeArray;
+                    }
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'What is their new role?',
+                    choices: () => {
+                        const array = [];
+                        for (var i = 0; i < result.length; i++) {
+                            array.push(result[i].title);
+                        }
+                        const newArray = [...new Set(array)];
+                        return newArray;
+                    }
+                }
+            ]).then((answers) => {
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].last_name === answers.employee) {
+                        const name = result[i];
+                    }
+                }
+
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].title === answers.role) {
+                        const role = result[i];
+                    }
+                }
+
+                database.query(`UPDATE employee SET ? WHERE ?`, [{role_id: role}, {last_name: name}], (result) => {
+                    console.log(`Updated ${answers.employee} role to the database.`)
+                    tracker();
+                });
+            })
+        });
     }
 };
