@@ -4,7 +4,7 @@ VALUES  ('Finance'),
         ('Brand Team'),
         ('IT'),
         ('Procurement'),
-        ('Operations'),;
+        ('Operations');
 
 INSERT INTO role (title, salary, department_id)
 VALUES  ('Staff Accountant', 70000, 1),
