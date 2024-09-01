@@ -12,21 +12,21 @@ const tracker = function () {
     }]).then((answers) => {
         if (answers.prompt === 'View all departments') {
             database.query(`SELECT * FROM department`, (err, result) => {
-                if (err) throw err;
+                // if (err) throw err;
                 console.log("Viewing All Departments: ");
                 console.table(result);
                 tracker();
             });
         } else if (answers.prompt === 'View all roles') {
             database.query(`SELECT * FROM role`, (err, result) => {
-                if (err) throw err;
+                // if (err) throw err;
                 console.log("Viewing All Roles: ");
                 console.table(result);
                 tracker();
             });
         } else if (answers.prompt === 'View all employees') {
             database.query(`SELECT * FROM employee`, (err, result) => {
-                if (err) throw err;
+                // if (err) throw err;
                 console.log("Viewing All Employees: ");
                 console.table(result);
                 tracker();
@@ -46,14 +46,14 @@ const tracker = function () {
                 }
             }]).then((departmentAnswers) => {
                 database.query(`INSERT INTO department (name) VALUES (?)`, [departmentAnswers.department], (err, result) => {
-                    if (err) throw err;
+                    // if (err) throw err;
                     console.log(`Added ${departmentAnswers.department} to the database.`);
                     tracker();
                 });
             });
         } else if (answers.prompt === 'Add a role') {
             database.query(`SELECT * FROM department`, (err, result) => {
-                if (err) throw err;
+                // if (err) throw err;
                 inquirer.prompt([
                     {
                         type: 'input',
@@ -92,7 +92,7 @@ const tracker = function () {
                 ]).then((roleAnswers) => {
                     const department = result.find(dep => dep.name === roleAnswers.department);
                     database.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [roleAnswers.role, roleAnswers.salary, department.id], (err, result) => {
-                        if (err) throw err;
+                        // if (err) throw err;
                         console.log(`Added ${roleAnswers.role} to the database.`);
                         tracker();
                     });
@@ -100,7 +100,7 @@ const tracker = function () {
             });
         } else if (answers.prompt === 'Add an employee') {
             database.query(`SELECT * FROM role`, (err, result) => {
-                if (err) throw err;
+                // if (err) throw err;
                 inquirer.prompt([
                     {
                         type: 'input',
@@ -152,7 +152,7 @@ const tracker = function () {
                 ]).then((employeeAnswers) => {
                     const role = result.find(r => r.title === employeeAnswers.role);
                     database.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [employeeAnswers.firstName, employeeAnswers.lastName, role.id, employeeAnswers.manager], (err, result) => {
-                        if (err) throw err;
+                        // if (err) throw err;
                         console.log(`Added ${employeeAnswers.firstName} ${employeeAnswers.lastName} to the database.`);
                         tracker();
                     });
