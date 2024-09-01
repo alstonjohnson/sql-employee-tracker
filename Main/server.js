@@ -1,7 +1,7 @@
 
 const inquirer = require('inquirer');
 const postgres = require('pg');
-const database = require('./database/connection')
+const database = require('./db/connection');
 
 
 const tracker = function () {
