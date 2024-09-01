@@ -11,10 +11,10 @@ const tracker = function () {
         choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
     }]).then((answers) => {
         if (answers.prompt === 'View all departments') {
-            database.query(`SELECT * FROM department`, (err, result) => {
+            database.query(`SELECT * FROM department`).then( ({rows}) => {
                 // if (err) throw err;
                 console.log("Viewing All Departments: ");
-                console.table(result);
+                console.table(rows);
                 tracker();
             });
         } else if (answers.prompt === 'View all roles') {
