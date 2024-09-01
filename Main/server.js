@@ -18,17 +18,17 @@ const tracker = function () {
                 tracker();
             });
         } else if (answers.prompt === 'View all roles') {
-            database.query(`SELECT * FROM role`, (err, result) => {
+            database.query(`SELECT * FROM role`).then( ({rows}) => {
                 // if (err) throw err;
                 console.log("Viewing All Roles: ");
-                console.table(result);
+                console.table(rows);
                 tracker();
             });
         } else if (answers.prompt === 'View all employees') {
-            database.query(`SELECT * FROM employee`, (err, result) => {
+            database.query(`SELECT * FROM employee`).then( ({rows}) => {
                 // if (err) throw err;
                 console.log("Viewing All Employees: ");
-                console.table(result);
+                console.table(rows);
                 tracker();
             });
         } else if (answers.prompt === 'Add a department') {
