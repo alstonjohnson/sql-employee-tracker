@@ -174,7 +174,76 @@ const tracker = function () {
                 });
             })
         });
-    } else if (answers.prompt === 'Update An Employee Role') {
+    } else if (answers.prompt === 'Update An Employee Role') {if (answers.prompt === 'Add An Employee') {
+        database.query(`SELECT * FROM employee, role`, (result) => {
+
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'firstName',
+                    message: 'What is the employees first name?',
+                    validate: firstNameInput => {
+                        if (firstNameInput) {
+                            return true;
+                        } else {
+                            console.log('Please Add A First Name!');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'lastName',
+                    message: 'What is the employees last name?',
+                    validate: lastNameInput => {
+                        if (lastNameInput) {
+                            return true;
+                        } else {
+                            console.log('Please Add A Salary!');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'What is the employees role?',
+                    choices: () => {
+                        const array = [];
+                        for (var i = 0; i < result.length; i++) {
+                            array.push(result[i].title);
+                        }
+                        const newArray = [...new Set(array)];
+                        return newArray;
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'manager',
+                    message: 'Who is the employees manager?',
+                    validate: managerInput => {
+                        if (managerInput) {
+                            return true;
+                        } else {
+                            console.log('Please Add A Manager!');
+                            return false;
+                        }
+                    }
+                }
+            ]).then((answers) => {
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].title === answers.role) {
+                        const role = result[i];
+                    }
+                }
+
+                database.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [answers.firstName, answers.lastName, role.id, answers.manager.id], (result) => {
+                    console.log(`Added ${answers.firstName} ${answers.lastName} to the database.`)
+                    tracker();
+                });
+            })
+        });
+    }
         database.query(`SELECT * FROM employee, role`, (result) => {
 
             inquirer.prompt([
@@ -225,3 +294,5 @@ const tracker = function () {
         });
     }
 };
+
+tracker();
