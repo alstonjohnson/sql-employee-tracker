@@ -14,21 +14,21 @@ const tracker = function () {
             database.query(`SELECT * FROM department`, (err, result) => {
                 // if (err) throw err;
                 console.log("Viewing All Departments: ");
-                console.table(result);
+                console.table(result.rows);
                 tracker();
             });
         } else if (answers.prompt === 'View all roles') {
             database.query(`SELECT * FROM role`, (err, result) => {
                 // if (err) throw err;
                 console.log("Viewing All Roles: ");
-                console.table(result);
+                console.table(result.rows);
                 tracker();
             });
         } else if (answers.prompt === 'View all employees') {
             database.query(`SELECT * FROM employee`, (err, result) => {
                 // if (err) throw err;
                 console.log("Viewing All Employees: ");
-                console.table(result);
+                console.table(result.rows);
                 tracker();
             });
         } else if (answers.prompt === 'Add a department') {
